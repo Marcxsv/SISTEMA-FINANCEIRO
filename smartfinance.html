@@ -9,7 +9,31 @@
 <meta name="theme-color" content="#1D9E75">
 <title>SmartFinance</title>
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcng9IjIwIiBmaWxsPSIjMUQ5RTc1Ii8+PHRleHQgeD0iNTAiIHk9IjY1IiBmb250LXNpemU9IjUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSI+JDwvdGV4dD48L3N2Zz4=">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js">
+function openTransactionEditor(id){
+ const t=transactions.find(x=>x.id===id);
+ if(!t) return;
+ nav('add');
+ setTimeout(()=>{
+   document.getElementById('add-nome').value=t.nome||'';
+   document.getElementById('add-valor').value=t.valor||0;
+   document.getElementById('add-cat').value=t.cat||'Outros';
+   document.getElementById('add-data').value=t.data||'';
+   document.getElementById('add-obs').value=t.obs||'';
+   window.editingId=id;
+ },100);
+}
+
+function deleteTransaction(){
+ if(!window.editingId) return;
+ if(!confirm('Excluir transação?')) return;
+ transactions=transactions.filter(t=>t.id!==window.editingId);
+ save('tx',transactions);
+ location.reload();
+}
+
+
+</script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{
@@ -422,7 +446,8 @@ function refreshHome(){
   const desp=txs.filter(t=>t.tipo==='despesa').reduce((a,t)=>a+t.valor,0);
   const saldo=rec-desp;
   const eco=Math.max(0,rec-desp-parcelas.reduce((a,p)=>a+p.mensal,0));
-  document.getElementById('h-saldo').textContent=fmt(saldo);
+  const saldoEl=document.getElementById('h-saldo');
+saldoEl.textContent=fmt(saldo);
   document.getElementById('h-rec').textContent=fmtS(rec);
   document.getElementById('h-desp').textContent=fmtS(desp);
   document.getElementById('h-eco').textContent=fmtS(eco);
