@@ -459,12 +459,23 @@ function refreshHome(){
   const saldo=rec-desp;
   const eco=Math.max(0,rec-desp-parcelas.reduce((a,p)=>a+p.mensal,0));
   
-  const heroEl = document.getElementById('hero-saldo');
-  if(saldo < 0) {
+ const saldoEl = document.getElementById('h-saldo');
+
+if (saldo < 0) {
     heroEl.classList.add('negative');
-  } else {
+    saldoEl.style.color = '#ffffff';
+    saldoEl.textContent = '- R$ ' + Math.abs(saldo).toLocaleString('pt-BR',{
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+    });
+} else {
     heroEl.classList.remove('negative');
-  }
+    saldoEl.style.color = '#ffffff';
+    saldoEl.textContent = 'R$ ' + saldo.toLocaleString('pt-BR',{
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+    });
+}
   
   document.getElementById('h-saldo').textContent=fmt(saldo);
   document.getElementById('h-rec').textContent=fmtS(rec);
@@ -491,7 +502,11 @@ function txHTML(t){
   const ico=CAT_ICONS[t.cat]||'💸';
   const dt=new Date(t.data+'T12:00:00');
   const dtFmt=`${String(dt.getDate()).padStart(2,'0')}/${String(dt.getMonth()+1).padStart(2,'0')}`;
-  return `<div class="tx" onclick="editTransaction(${t.id})"><div class="tx-ico" style="background:${t.tipo==='receita'?'var(--green-l)':'var(--bg2)'};font-size:18px">${ico}</div><div class="tx-info"><div class="tx-name">${t.nome}</div><div class="tx-cat">${t.cat} · ${dtFmt}</div></div><div class="tx-val ${t.tipo==='receita'?'pos':'neg'}">+${fmt(t.valor)}</div></div>`;
+  return `<div class="tx" onclick="editTransaction(${t.id})"><div class="tx-ico" style="background:${t.tipo==='receita'?'var(--green-l)':'var(--bg2)'};font-size:18px">${ico}</div><div class="tx-info"><div class="tx-name">${t.nome}</div><div class="tx-cat">${t.cat} · ${dtFmt}</div></div><div class="tx-val ${t.tipo==='receita'?'pos':'neg'}">
+    ${t.tipo === 'receita'
+      ? '+ ' + fmt(t.valor)
+      : '- ' + fmt(t.valor)}
+</div></div>`;
 }
 
 // TX FILTER
@@ -555,14 +570,53 @@ function editTransaction(id){
 }
 
 function deleteTransaction(){
-  if(!editingTxId) return;
-  if(!confirm('Tem certeza que deseja excluir esta transação?')) return;
-  
-  transactions = transactions.filter(t => t.id !== editingTxId);
-  save('tx', transactions);
-  showToast('✓ Transação excluída!');
-  editingTxId = null;
-  setTimeout(() => nav('transacoes'), 300);
+
+    if(!editingTxId) return;
+
+    const tx = transactions.find(
+        t => t.id === editingTxId
+    );
+
+    if(!tx) return;
+
+    const msg =
+      tx.tipo === 'despesa'
+      ? 'Tem certeza que deseja excluir esta despesa?'
+      : 'Tem certeza que deseja excluir esta transação?';
+
+    if(!confirm(msg)) return;
+
+    transactions =
+      transactions.filter(
+        t => t.id !== editingTxId
+      );
+
+    save('tx', transactions);
+
+    editingTxId = null;
+
+    refreshAll();
+
+    showToast('✓ Excluído com sucesso');
+
+    setTimeout(()=>{
+        nav('transacoes');
+    },300);
+}
+  function editMeta(id){
+
+    const meta =
+      metas.find(m => m.id === id);
+
+    if(!meta) return;
+
+    editingMetaId = id;
+
+    document.getElementById('m-nome').value = meta.nome;
+    document.getElementById('m-val').value = meta.val;
+    document.getElementById('m-cur').value = meta.cur;
+
+    document.getElementById('modal-meta').style.display='block';
 }
 
 function saveTransaction(){
@@ -583,6 +637,7 @@ function saveTransaction(){
       tx.obs = document.getElementById('add-obs').value.trim();
     }
     save('tx', transactions);
+    refreshAll();
     showToast('✓ Transação atualizada!');
   } else {
     // Criar novo
@@ -643,6 +698,7 @@ function setPeriodo(p){
   ['mes','trim','ano'].forEach(x=>{const b=document.getElementById('p-'+x);b.style.background='';b.style.color='';b.style.borderColor='';});
   const b=document.getElementById('p-'+p);b.style.background='var(--blue)';b.style.color='#fff';b.style.borderColor='var(--blue)';
 }
+  let editingMetaId = null;
 
 // METAS
 function buildMetas(){
@@ -667,7 +723,49 @@ function buildMetas(){
 
 function openAddMeta(){document.getElementById('modal-meta').style.display='block';}
 function closeModal(id){document.getElementById(id).style.display='none';}
+  function deleteMeta(id){
+
+    if(
+      !confirm(
+       'Tem certeza que deseja excluir esta meta?'
+      )
+    ) return;
+
+    metas =
+      metas.filter(
+        m => m.id !== id
+      );
+
+    save('metas', metas);
+
+    refreshAll();
+
+    showToast('✓ Meta removida');
+}
 function saveMeta(){
+  if(editingMetaId){
+
+    const meta =
+      metas.find(
+        m => m.id === editingMetaId
+      );
+
+    meta.nome = nome;
+    meta.val = val;
+    meta.cur = cur;
+
+    save('metas', metas);
+
+    editingMetaId = null;
+
+    closeModal('modal-meta');
+
+    refreshAll();
+
+    showToast('✓ Meta atualizada');
+
+    return;
+}
   const nome=document.getElementById('m-nome').value.trim();
   const val=parseFloat(document.getElementById('m-val').value);
   const cur=parseFloat(document.getElementById('m-cur').value)||0;
@@ -700,7 +798,11 @@ function buildCal(){
   }
   document.getElementById('cal-body').innerHTML=html;
   const evHtml=Object.entries(evDays).sort((a,b)=>+a[0]-+b[0]).map(([day,txs])=>
-    txs.map(t=>`<div class="ev-item"><div class="ev-day">${day}</div><div class="ev-text">${CAT_ICONS[t.cat]||'💸'} ${t.nome} — ${fmt(t.valor)}</div><span class="badge ${t.tipo==='receita'?'g':'r'}">${t.tipo}</span></div>`).join('')
+    txs.map(t=>`<div class="ev-item"><div class="ev-day">${day}</div><div class="ev-text">${CAT_ICONS[t.cat]||'💸'} ${t.nome} — ${
+    t.tipo === 'despesa'
+      ? '- ' + fmt(t.valor)
+      : '+ ' + fmt(t.valor)
+}</div><span class="badge ${t.tipo==='receita'?'g':'r'}">${t.tipo}</span></div>`).join('')
   ).join('');
   document.getElementById('cal-evs').innerHTML=evHtml||'<div style="color:var(--text2);font-size:13px;padding:10px 0">Nenhum evento registrado este mês.</div>';
 }
@@ -719,6 +821,19 @@ function addMsg(text,type){
   d.className='ai-msg '+type; d.textContent=text;
   document.getElementById('ia-msgs').appendChild(d);
   d.scrollIntoView({behavior:'smooth'});
+}
+  function refreshAll(){
+    refreshHome();
+    renderTx();
+    buildMetas();
+
+    if(chartsBuilt){
+        updateCharts();
+    }
+
+    if(currentScreen === 'cal'){
+        buildCal();
+    }
 }
 function initIA(){
   iaInited=true;
