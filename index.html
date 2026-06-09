@@ -90,12 +90,13 @@ html,body{height:100%;overflow:hidden;background:var(--bg3);font-family:-apple-s
 .btn.full{width:100%}
 .btn.sm{padding:6px 12px;font-size:13px}
 .btn.danger{background:var(--red);color:#fff;border-color:var(--red)}
+.btn.icon-btn{padding:6px 8px;border-radius:8px}
 .alert-box{display:flex;gap:10px;align-items:flex-start;background:var(--amber-l);border-radius:var(--radius);padding:10px 12px;margin:8px 16px 0}
 .alert-box span{font-size:20px;flex-shrink:0}
 .alert-box p{font-size:13px;color:var(--amber-d);line-height:1.45}
 .form-label{font-size:12px;color:var(--text2);margin-bottom:5px;display:block;font-weight:500}
 .form-group{margin-bottom:14px}
-input,select,textarea{width:100%;padding:10px 12px;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);font-size:15px;color:var(--text);-webkit-appearance:none;outline:none}
+input,select,textarea{width:100%;padding:10px 12px;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);font-size:15px;color:var(--text);-webkit-appearance:none;outline:none;font-family:inherit}
 input:focus,select:focus,textarea:focus{border-color:var(--green)}
 textarea{min-height:72px;resize:none}
 select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath fill='%23888' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:28px}
@@ -109,13 +110,32 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 .goal-name{font-size:14px;font-weight:600;color:var(--text)}
 .goal-pct{font-size:13px;font-weight:600;color:var(--green)}
 .goal-sub{font-size:12px;color:var(--text2);margin-top:3px}
-.goal-actions{margin-top:10px}
-.parcel-card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start}
+.goal-actions{margin-top:10px;display:flex;gap:8px}
+.goal-actions .btn{flex:1}
+/* Parcel cards com ações */
+.parcel-card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px;margin-bottom:10px}
+.parcel-top{display:flex;gap:12px;align-items:flex-start}
 .parcel-ico{width:42px;height:42px;background:var(--bg2);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
 .parcel-info{flex:1;min-width:0}
 .parcel-name{font-size:14px;font-weight:600;color:var(--text)}
 .parcel-sub{font-size:12px;color:var(--text2);margin-top:2px}
 .parcel-val{font-size:14px;font-weight:600;color:var(--red);text-align:right;flex-shrink:0}
+.parcel-actions{display:flex;gap:8px;margin-top:10px}
+.parcel-actions .btn{flex:1}
+/* Contas cards */
+.bill-card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px;margin-bottom:10px}
+.bill-top{display:flex;gap:12px;align-items:flex-start}
+.bill-ico{width:38px;height:38px;background:var(--bg2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.bill-info{flex:1;min-width:0}
+.bill-name{font-size:14px;font-weight:600;color:var(--text)}
+.bill-sub{font-size:12px;color:var(--text2);margin-top:2px}
+.bill-val{font-size:15px;font-weight:700;color:var(--red);text-align:right;flex-shrink:0}
+.bill-actions{display:flex;gap:8px;margin-top:10px}
+.bill-actions .btn{flex:1}
+.bill-status-vencida{color:var(--red-d);background:var(--red-l);border-radius:6px;padding:2px 7px;font-size:11px;font-weight:600}
+.bill-status-hoje{color:var(--amber-d);background:var(--amber-l);border-radius:6px;padding:2px 7px;font-size:11px;font-weight:600}
+.bill-status-proxima{color:var(--blue-d);background:var(--blue-l);border-radius:6px;padding:2px 7px;font-size:11px;font-weight:600}
+.bill-status-ok{color:var(--green-d);background:var(--green-l);border-radius:6px;padding:2px 7px;font-size:11px;font-weight:600}
 .bud-item{margin-bottom:16px}
 .bud-row{display:flex;justify-content:space-between;margin-bottom:5px}
 .bud-name{font-size:13px;font-weight:600;color:var(--text);display:flex;align-items:center;gap:6px}
@@ -144,10 +164,13 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 .ai-input button{flex-shrink:0;padding:9px 14px;width:auto}
 .toast{position:absolute;top:calc(var(--safe-top) + 70px);left:50%;transform:translateX(-50%);background:var(--green);color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:500;pointer-events:none;z-index:1000;animation:fadeIn .2s ease}
 .modal-bg{position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:100;display:flex;align-items:flex-end;animation:fadeIn .2s ease}
-.modal{background:var(--bg);border-radius:20px 20px 0 0;padding:20px 20px calc(var(--safe-bot)+20px);width:100%}
+.modal{background:var(--bg);border-radius:20px 20px 0 0;padding:20px 20px calc(var(--safe-bot)+20px);width:100%;max-height:92vh;overflow-y:auto}
 .modal h3{font-size:17px;font-weight:700;margin-bottom:16px;color:var(--text)}
 .action-buttons{display:flex;gap:8px;margin-top:16px}
 .action-buttons .btn{flex:1}
+/* SVG icon helpers */
+.ico-edit{display:inline-flex}
+.ico-del{display:inline-flex}
 </style>
 </head>
 <body>
@@ -208,7 +231,7 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
   <nav class="nav" id="nav-tx"></nav>
 </div>
 
-<!-- ADICIONAR/EDITAR -->
+<!-- ADICIONAR/EDITAR TRANSAÇÃO -->
 <div class="screen" id="s-add">
   <div class="header">
     <button class="btn sm" onclick="nav('home')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
@@ -247,7 +270,10 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
     <div class="form-group"><label class="form-label">Observação (opcional)</label><textarea id="add-obs" placeholder="Notas..."></textarea></div>
     <button class="btn primary full" onclick="saveTransaction()">Salvar transação</button>
     <div id="delete-section" style="display:none;margin-top:12px">
-      <button class="btn danger full" onclick="deleteTransaction()">🗑️ Excluir transação</button>
+      <button class="btn danger full" onclick="deleteTransaction()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+        Excluir transação
+      </button>
     </div>
     <div style="height:20px"></div>
   </div>
@@ -290,21 +316,50 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 <div class="screen" id="s-metas">
   <div class="header">
     <div class="logo" style="font-size:16px">Metas &amp; Orçamento</div>
-    <button class="btn sm" onclick="openAddMeta()" style="background:var(--green);color:#fff;border-color:var(--green)">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-      Meta
-    </button>
+    <div style="display:flex;gap:6px">
+      <button class="btn sm" onclick="openAddParcela()" style="background:var(--blue);color:#fff;border-color:var(--blue)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Parcela
+      </button>
+      <button class="btn sm" onclick="openAddOrc()" style="background:var(--amber);color:#fff;border-color:var(--amber)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Orç.
+      </button>
+      <button class="btn sm" onclick="openAddMeta()" style="background:var(--green);color:#fff;border-color:var(--green)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Meta
+      </button>
+    </div>
   </div>
   <div class="scroll">
     <div class="sec" style="margin-top:4px">Metas financeiras</div>
     <div style="padding:0 16px" id="metas-list"></div>
-    <div class="sec">Parcelas ativas</div>
-    <div id="parcelas-list"></div>
-    <div class="sec">Orçamento mensal</div>
+    <div class="sec">
+      Parcelas ativas
+      <a onclick="openAddParcela()">+ nova</a>
+    </div>
+    <div style="padding:0 16px" id="parcelas-list"></div>
+    <div class="sec">Orçamento mensal <a onclick="openAddOrc()">+ novo</a></div>
     <div style="padding:0 16px" id="orc-list"></div>
     <div style="height:20px"></div>
   </div>
   <nav class="nav" id="nav-metas"></nav>
+</div>
+
+<!-- CONTAS -->
+<div class="screen" id="s-contas">
+  <div class="header">
+    <button class="btn sm" onclick="nav('home')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
+    <h2>Contas a pagar</h2>
+    <button class="btn sm" onclick="openAddBill()" style="background:var(--green);color:#fff;border-color:var(--green)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+  </div>
+  <div style="padding:10px 16px 0;display:flex;gap:8px;flex-wrap:wrap;flex-shrink:0">
+    <button class="btn sm" id="bf-all" onclick="filterBills('all')" style="border-radius:20px;background:var(--green);color:#fff;border-color:var(--green)">Todas</button>
+    <button class="btn sm" id="bf-pend" onclick="filterBills('pendente')" style="border-radius:20px">Pendentes</button>
+    <button class="btn sm" id="bf-venc" onclick="filterBills('vencida')" style="border-radius:20px">Vencidas</button>
+  </div>
+  <div class="scroll" style="padding:10px 16px 90px" id="bills-list"></div>
+  <nav class="nav" id="nav-contas"></nav>
 </div>
 
 <!-- CALENDÁRIO -->
@@ -362,8 +417,128 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
       </div>
       <div class="form-group"><label class="form-label">Descrição (opcional)</label><textarea id="m-desc" placeholder="Descreva sua meta..."></textarea></div>
       <div class="action-buttons">
-        <button class="btn danger" id="meta-delete-btn" style="display:none" onclick="deleteMeta()">Excluir</button>
+        <button class="btn danger" id="meta-delete-btn" style="display:none" onclick="deleteMeta()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M9 6V4h6v2"/></svg>
+          Excluir
+        </button>
         <button class="btn primary" id="meta-save-btn" onclick="saveMeta()">Criar meta</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PARCELA (criar/editar) -->
+<div id="modal-parcela" style="display:none">
+  <div class="modal-bg" onclick="closeModal('modal-parcela')">
+    <div class="modal" onclick="event.stopPropagation()">
+      <h3 id="parc-title">Nova parcela</h3>
+      <div class="form-group"><label class="form-label">Nome / Descrição</label><input id="p-nome" placeholder="Ex: iPhone 15 Pro, Geladeira..."></div>
+      <div class="grid2" style="gap:10px;margin-bottom:14px">
+        <div><label class="form-label">Valor total (R$)</label><input id="p-total" type="number" placeholder="1200" inputmode="decimal" oninput="calcParcVal()"></div>
+        <div><label class="form-label">Nº de parcelas</label><input id="p-qtd" type="number" placeholder="12" min="1" max="120" inputmode="numeric" oninput="calcParcVal()"></div>
+      </div>
+      <div class="form-group" id="p-mensal-preview" style="background:var(--green-l);border-radius:var(--radius);padding:10px 12px;display:none">
+        <span style="font-size:13px;color:var(--green-d);font-weight:600">Valor da parcela: <span id="p-mensal-val">—</span>/mês</span>
+      </div>
+      <div class="grid2" style="gap:10px;margin-bottom:14px">
+        <div><label class="form-label">Data inicial</label><input id="p-data" type="date"></div>
+        <div><label class="form-label">Categoria</label>
+          <select id="p-cat">
+            <option>Compras</option><option>Eletrônicos</option><option>Móveis</option><option>Veículos</option><option>Saúde</option><option>Educação</option><option>Outros</option>
+          </select>
+        </div>
+      </div>
+      <div id="p-pago-group" style="display:none">
+        <div class="form-group"><label class="form-label">Parcelas já pagas</label><input id="p-pago" type="number" placeholder="0" min="0" inputmode="numeric"></div>
+      </div>
+      <div class="form-group"><label class="form-label">Observações (opcional)</label><textarea id="p-obs" placeholder="Notas sobre este parcelamento..."></textarea></div>
+      <div class="action-buttons">
+        <button class="btn danger" id="parc-delete-btn" style="display:none" onclick="openDeleteParcelaConfirm()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M9 6V4h6v2"/></svg>
+          Excluir
+        </button>
+        <button class="btn primary" id="parc-save-btn" onclick="saveParcela()">Criar parcela</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CONFIRMAÇÃO EXCLUSÃO PARCELA -->
+<div id="modal-del-parcela" style="display:none">
+  <div class="modal-bg" onclick="closeModal('modal-del-parcela')">
+    <div class="modal" onclick="event.stopPropagation()">
+      <h3>Excluir parcelamento</h3>
+      <p style="font-size:14px;color:var(--text2);margin-bottom:16px;line-height:1.5">Tem certeza que deseja excluir este parcelamento? Escolha o que deseja remover:</p>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <button class="btn full" onclick="deleteParcelaFuturas()" style="border-color:var(--amber);color:var(--amber-d);background:var(--amber-l)">
+          🗓️ Excluir apenas parcelas futuras
+        </button>
+        <button class="btn danger full" onclick="deleteParcelaTudo()">
+          🗑️ Excluir todo o parcelamento
+        </button>
+        <button class="btn full" onclick="closeModal('modal-del-parcela')">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CONTA (criar/editar) -->
+<div id="modal-bill" style="display:none">
+  <div class="modal-bg" onclick="closeModal('modal-bill')">
+    <div class="modal" onclick="event.stopPropagation()">
+      <h3 id="bill-title">Nova conta</h3>
+      <div class="form-group"><label class="form-label">Nome da conta</label><input id="b-nome" placeholder="Ex: Internet, Energia, Netflix..."></div>
+      <div class="grid2" style="gap:10px;margin-bottom:14px">
+        <div><label class="form-label">Valor (R$)</label><input id="b-val" type="number" placeholder="0,00" inputmode="decimal" step="0.01"></div>
+        <div><label class="form-label">Categoria</label>
+          <select id="b-cat">
+            <option>Moradia</option><option>Saúde</option><option>Assinaturas</option><option>Transporte</option><option>Educação</option><option>Alimentação</option><option>Outros</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Data de vencimento (opcional)</label>
+        <input id="b-venc" type="date">
+        <div style="display:flex;align-items:center;gap:8px;margin-top:8px">
+          <input type="checkbox" id="b-sem-venc" style="width:auto;padding:0;margin:0" onchange="toggleBillDueDate()">
+          <label for="b-sem-venc" style="font-size:13px;color:var(--text2);margin:0;font-weight:400">Sem data de vencimento</label>
+        </div>
+      </div>
+      <div class="form-group"><label class="form-label">Observação (opcional)</label><textarea id="b-obs" placeholder="Notas..."></textarea></div>
+      <div class="action-buttons">
+        <button class="btn danger" id="bill-delete-btn" style="display:none" onclick="deleteBill()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M9 6V4h6v2"/></svg>
+          Excluir
+        </button>
+        <button class="btn primary" id="bill-save-btn" onclick="saveBill()">Salvar conta</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL ORÇAMENTO -->
+<div id="modal-orc" style="display:none">
+  <div class="modal-bg" onclick="closeModal('modal-orc')">
+    <div class="modal" onclick="event.stopPropagation()">
+      <h3 id="orc-title">Novo orçamento</h3>
+      <div class="form-group">
+        <label class="form-label">Categoria</label>
+        <select id="o-cat">
+          <option>Alimentação</option><option>Transporte</option><option>Moradia</option><option>Saúde</option>
+          <option>Educação</option><option>Lazer</option><option>Assinaturas</option><option>Compras</option>
+          <option>Pets</option><option>Academia</option><option>Viagens</option><option>Investimentos</option><option>Outros</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Limite mensal (R$)</label>
+        <input id="o-limite" type="number" placeholder="500" inputmode="decimal" step="0.01">
+      </div>
+      <div class="action-buttons">
+        <button class="btn danger" id="orc-delete-btn" style="display:none" onclick="deleteOrc()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M9 6V4h6v2"/></svg>
+          Excluir
+        </button>
+        <button class="btn primary" id="orc-save-btn" onclick="saveOrc()">Criar orçamento</button>
       </div>
     </div>
   </div>
@@ -372,19 +547,23 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 <script>
 const MONTHS = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
 const MONTHS_SHORT = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-const CAT_ICONS = {Alimentação:'🍔',Transporte:'🚗',Moradia:'🏠',Saúde:'💊',Educação:'📚',Lazer:'🎬',Assinaturas:'📺',Compras:'🛍️',Pets:'🐾',Academia:'🏋️',Viagens:'✈️',Investimentos:'📈',Salário:'💰',Freelance:'💻',Comissão:'🤝',Outros:'📦'};
+const CAT_ICONS = {Alimentação:'🍔',Transporte:'🚗',Moradia:'🏠',Saúde:'💊',Educação:'📚',Lazer:'🎬',Assinaturas:'📺',Compras:'🛍️',Pets:'🐾',Academia:'🏋️',Viagens:'✈️',Investimentos:'📈',Salário:'💰',Freelance:'💻',Comissão:'🤝',Outros:'📦',Eletrônicos:'📱',Móveis:'🛋️',Veículos:'🚙'};
 const CAT_COLORS = ['#1D9E75','#378ADD','#534AB7','#E24B4A','#BA7517','#D4537E','#D85A30','#639922','#1D9E75','#5DCAA5','#7F77DD','#EF9F27','#888780'];
 
 function fmt(v){
-  const abs = Math.abs(v);
-  const sign = v < 0 ? '- ' : '';
-  return sign + 'R$ ' + abs.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const abs=Math.abs(v);
+  const sign=v<0?'- ':'';
+  return sign+'R$ '+abs.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
 }
 function fmtS(v){
-  const abs = Math.abs(v);
-  const sign = v < 0 ? '- ' : '';
-  return sign + 'R$ ' + abs.toLocaleString('pt-BR',{minimumFractionDigits:0,maximumFractionDigits:0});
+  const abs=Math.abs(v);
+  const sign=v<0?'- ':'';
+  return sign+'R$ '+abs.toLocaleString('pt-BR',{minimumFractionDigits:0,maximumFractionDigits:0});
 }
+
+// SVG icons inline
+const SVG_EDIT=`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>`;
+const SVG_DEL=`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M9 6V4h6v2"/></svg>`;
 
 // STORAGE
 function load(k,def){try{const r=localStorage.getItem('sf_'+k);return r?JSON.parse(r):def}catch{return def}}
@@ -402,10 +581,19 @@ let transactions = load('tx',[
   {id:9,tipo:'despesa',nome:'Farmácia',valor:67,cat:'Saúde',data:'2025-06-11',pagto:'Pix',rec:0,obs:''},
   {id:10,tipo:'despesa',nome:'Energia',valor:143,cat:'Moradia',data:'2025-06-12',pagto:'Boleto',rec:1,obs:''},
 ]);
+// parcela fields: id, nome, ico, total, pago, total_p, mensal, cat, dataInicial, obs
 let parcelas = load('parc',[
-  {id:1,nome:'iPhone 15 Pro',ico:'📱',total:7500,pago:5,total_p:15,mensal:500},
-  {id:2,nome:'Geladeira',ico:'🧊',total:2400,pago:8,total_p:12,mensal:200},
-  {id:3,nome:'Bike elétrica',ico:'🚲',total:3600,pago:2,total_p:12,mensal:300},
+  {id:1,nome:'iPhone 15 Pro',ico:'📱',total:7500,pago:5,total_p:15,mensal:500,cat:'Eletrônicos',dataInicial:'2024-07-01',obs:''},
+  {id:2,nome:'Geladeira',ico:'🧊',total:2400,pago:8,total_p:12,mensal:200,cat:'Móveis',dataInicial:'2024-10-01',obs:''},
+  {id:3,nome:'Bike elétrica',ico:'🚲',total:3600,pago:2,total_p:12,mensal:300,cat:'Outros',dataInicial:'2025-04-01',obs:''},
+]);
+// bill fields: id, nome, valor, cat, vencimento(date string or null), obs, paga
+let bills = load('bills',[
+  {id:10001,nome:'Internet',valor:99.9,cat:'Moradia',vencimento:'2025-06-15',obs:'Fibra 200mb',paga:false},
+  {id:10002,nome:'Energia',valor:143,cat:'Moradia',vencimento:'2025-06-12',obs:'',paga:false},
+  {id:10003,nome:'Água',valor:58,cat:'Moradia',vencimento:'2025-06-20',obs:'',paga:false},
+  {id:10004,nome:'Cartão de crédito',valor:850,cat:'Compras',vencimento:'2025-06-10',obs:'Fatura de maio',paga:false},
+  {id:10005,nome:'Spotify',valor:21.9,cat:'Assinaturas',vencimento:null,obs:'Assinatura mensal',paga:false},
 ]);
 let metas = load('metas',[
   {id:1,nome:'Reserva de emergência',val:8000,cur:4800},
@@ -418,17 +606,18 @@ let orcamentos = load('orc',[
   {cat:'Transporte',limite:350,color:'#534AB7'},
   {cat:'Saúde',limite:200,color:'#E24B4A'},
 ]);
-let nextId = load('nextId',100);
-let currentScreen='home', calOffset=0, activeTxFilter='all', iaInited=false, editingTxId=null, editingMetaId=null;
+let nextId = load('nextId',20000);
+let currentScreen='home', calOffset=0, activeTxFilter='all', activeBillFilter='all', iaInited=false;
+let editingTxId=null, editingMetaId=null, editingParcelaId=null, editingBillId=null, editingOrcCat=null;
 let charts={};
 
-// NAV
+// NAV — added 'contas'
 const NAVS=[
   {id:'home',label:'Início',path:'M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z M9 22V12h6v10'},
   {id:'transacoes',label:'Transações',path:'M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2 M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2 M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2 M12 12v4 M9 15h6'},
-  {id:'graficos',label:'Relatórios',path:'M18 20V10 M12 20V4 M6 20v-6'},
+  {id:'contas',label:'Contas',path:'M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z M12 22V12 M3.27 6.96L12 12.01l8.73-5.05'},
   {id:'metas',label:'Metas',path:'M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z M12 8v4l3 3'},
-  {id:'cal',label:'Calendário',path:'M8 2v4 M16 2v4 M3 10h18 M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z'},
+  {id:'graficos',label:'Relatórios',path:'M18 20V10 M12 20V4 M6 20v-6'},
   {id:'ia',label:'IA',path:'M12 8V4H8 M8 2h4v4H8z M16 8V4h4 M16 2h4v4h-4z M20 14v4h-4 M16 16h4v4h-4z M8 18v-4H4 M4 16h4v4H4z M12 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0-4 0'},
 ];
 
@@ -448,14 +637,16 @@ function nav(s){
   if(s==='transacoes')renderTx();
   if(s==='graficos')setTimeout(buildCharts,80);
   if(s==='metas')buildMetas();
+  if(s==='contas')renderBills();
   if(s==='cal')buildCal();
   if(s==='ia'&&!iaInited)initIA();
 }
 
 function refreshAllUI(){
   refreshHome();
-  renderTx();
+  if(currentScreen==='transacoes')renderTx();
   buildMetas();
+  if(currentScreen==='contas')renderBills();
   updateCharts();
   if(currentScreen==='cal')buildCal();
 }
@@ -463,6 +654,7 @@ function refreshAllUI(){
 // INIT
 document.querySelectorAll('.nav').forEach(el=>el.innerHTML=navHTML('home'));
 document.getElementById('add-data').value=new Date().toISOString().split('T')[0];
+document.getElementById('p-data').value=new Date().toISOString().split('T')[0];
 
 // HOME
 function getMonthTx(){
@@ -475,14 +667,8 @@ function refreshHome(){
   const desp=txs.filter(t=>t.tipo==='despesa').reduce((a,t)=>a+t.valor,0);
   const saldo=rec-desp;
   const eco=Math.max(0,rec-desp-parcelas.reduce((a,p)=>a+p.mensal,0));
-  
-  const heroEl = document.getElementById('hero-saldo');
-  if(saldo < 0) {
-    heroEl.classList.add('negative');
-  } else {
-    heroEl.classList.remove('negative');
-  }
-  
+  const heroEl=document.getElementById('hero-saldo');
+  saldo<0?heroEl.classList.add('negative'):heroEl.classList.remove('negative');
   document.getElementById('h-saldo').textContent=fmt(saldo);
   document.getElementById('h-rec').textContent=fmtS(rec);
   document.getElementById('h-desp').textContent=fmtS(desp);
@@ -496,11 +682,22 @@ function refreshHome(){
   let over80=0;
   orcamentos.forEach(o=>{if(catTotals[o.cat]&&catTotals[o.cat]/o.limite>=0.8)over80++;});
   document.getElementById('h-orc').textContent=over80;
+  // pending bills next 7 days
+  const today=new Date(); today.setHours(0,0,0,0);
+  const in7=new Date(today); in7.setDate(in7.getDate()+7);
+  const pendCnt=bills.filter(b=>{
+    if(b.paga)return false;
+    if(!b.vencimento)return false;
+    const d=new Date(b.vencimento+'T12:00:00');
+    return d<=in7;
+  }).length;
+  document.getElementById('h-pend').textContent=pendCnt;
+  // alerts
   const alerts=document.getElementById('home-alerts');
-  const recs=transactions.filter(t=>t.rec&&t.tipo==='despesa');
-  const alertsHtml=recs.slice(0,2).map(t=>`<div class="alert-box"><span>⚠️</span><p><strong>${t.nome}</strong> é recorrente — verifique o vencimento e atualize se necessário.</p></div>`).join('');
-  alerts.innerHTML=alertsHtml;
+  const vencidas=bills.filter(b=>!b.paga&&b.vencimento&&new Date(b.vencimento+'T12:00:00')<today);
+  let alertsHtml=vencidas.slice(0,2).map(b=>`<div class="alert-box"><span>🔴</span><p><strong>${b.nome}</strong> está vencida — ${fmt(b.valor)}</p></div>`).join('');
   document.getElementById('home-tx').innerHTML=[...transactions].reverse().slice(0,5).map(txHTML).join('');
+  alerts.innerHTML=alertsHtml;
 }
 refreshHome();
 
@@ -515,9 +712,7 @@ function txHTML(t){
 // TX FILTER
 function filterTx(f){
   activeTxFilter=f;
-  ['all','rec','desp'].forEach(x=>document.getElementById('f-'+x).style.background='');
-  ['all','rec','desp'].forEach(x=>document.getElementById('f-'+x).style.color='');
-  ['all','rec','desp'].forEach(x=>document.getElementById('f-'+x).style.borderColor='');
+  ['all','rec','desp'].forEach(x=>document.getElementById('f-'+x).style.cssText='');
   const ids={all:'f-all',receita:'f-rec',despesa:'f-desp'};
   const colors={all:'var(--green)',receita:'var(--green)',despesa:'var(--red)'};
   const el=document.getElementById(ids[f]);
@@ -537,8 +732,8 @@ let currentTab='despesa';
 function setTab(t){
   currentTab=t;
   const cols={despesa:'var(--red)',receita:'var(--green)',parcela:'var(--blue)'};
-  ['despesa','receita','parcela'].forEach(x=>{
-    const b=document.getElementById('t-'+x.slice(0,x==='parcela'?5:3));
+  [{k:'despesa',id:'t-desp'},{k:'receita',id:'t-rec'},{k:'parcela',id:'t-parc'}].forEach(x=>{
+    const b=document.getElementById(x.id);
     if(b){b.style.background='';b.style.color='';}
   });
   const ids={despesa:'t-desp',receita:'t-rec',parcela:'t-parc'};
@@ -552,62 +747,53 @@ function setTab(t){
 }
 
 function editTransaction(id){
-  const tx = transactions.find(t => t.id === id);
-  if(!tx) return;
-  
-  editingTxId = id;
-  currentTab = tx.tipo === 'parcela' ? 'parcela' : tx.tipo;
+  const tx=transactions.find(t=>t.id===id);
+  if(!tx)return;
+  editingTxId=id;
+  currentTab=tx.tipo;
   setTab(currentTab);
-  
-  document.getElementById('add-title').textContent = 'Editar Transação';
-  document.getElementById('add-nome').value = tx.nome;
-  document.getElementById('add-valor').value = tx.valor;
-  document.getElementById('add-cat').value = tx.cat;
-  document.getElementById('add-data').value = tx.data;
-  document.getElementById('add-pagto').value = tx.pagto;
-  document.getElementById('add-rec').value = tx.rec;
-  document.getElementById('add-obs').value = tx.obs;
-  document.getElementById('delete-section').style.display = 'block';
-  
+  document.getElementById('add-title').textContent='Editar Transação';
+  document.getElementById('add-nome').value=tx.nome;
+  document.getElementById('add-valor').value=tx.valor;
+  document.getElementById('add-cat').value=tx.cat;
+  document.getElementById('add-data').value=tx.data;
+  if(tx.pagto) document.getElementById('add-pagto').value=tx.pagto;
+  document.getElementById('add-rec').value=tx.rec;
+  document.getElementById('add-obs').value=tx.obs||'';
+  document.getElementById('delete-section').style.display='block';
   nav('add');
 }
 
 function deleteTransaction(){
-  if(!editingTxId) return;
+  if(!editingTxId)return;
   const tx=transactions.find(t=>t.id===editingTxId);
-  if(!tx) return;
-  const msg=tx.tipo==='despesa'?'Tem certeza que deseja excluir esta despesa?':'Tem certeza que deseja excluir esta transação?';
-  if(!confirm(msg)) return;
-  
-  transactions = transactions.filter(t => t.id !== editingTxId);
-  save('tx', transactions);
+  if(!tx)return;
+  if(!confirm('Tem certeza que deseja excluir esta transação?'))return;
+  transactions=transactions.filter(t=>t.id!==editingTxId);
+  save('tx',transactions);
   showToast('✓ Transação excluída!');
-  editingTxId = null;
+  editingTxId=null;
   refreshAllUI();
-  setTimeout(() => nav('transacoes'), 300);
+  setTimeout(()=>nav('transacoes'),300);
 }
 
 function saveTransaction(){
   const nome=document.getElementById('add-nome').value.trim();
   const valor=parseFloat(document.getElementById('add-valor').value);
   if(!nome||isNaN(valor)||valor<=0){showToast('Preencha nome e valor!');return;}
-  
-  if(editingTxId) {
-    // Editar existente
-    const tx = transactions.find(t => t.id === editingTxId);
-    if(tx) {
-      tx.nome = nome;
-      tx.valor = valor;
-      tx.cat = document.getElementById('add-cat').value;
-      tx.data = document.getElementById('add-data').value;
-      tx.pagto = currentTab!=='receita' ? document.getElementById('add-pagto').value : '';
-      tx.rec = parseInt(document.getElementById('add-rec').value);
-      tx.obs = document.getElementById('add-obs').value.trim();
+  if(editingTxId){
+    const tx=transactions.find(t=>t.id===editingTxId);
+    if(tx){
+      tx.nome=nome; tx.valor=valor;
+      tx.cat=document.getElementById('add-cat').value;
+      tx.data=document.getElementById('add-data').value;
+      tx.pagto=currentTab!=='receita'?document.getElementById('add-pagto').value:'';
+      tx.rec=parseInt(document.getElementById('add-rec').value);
+      tx.obs=document.getElementById('add-obs').value.trim();
     }
-    save('tx', transactions);
+    save('tx',transactions);
     showToast('✓ Transação atualizada!');
-  } else {
-    // Criar novo
+  }else{
     const tx={
       id:nextId++, tipo:currentTab==='parcela'?'despesa':currentTab,
       nome, valor, cat:document.getElementById('add-cat').value,
@@ -619,18 +805,17 @@ function saveTransaction(){
     transactions.push(tx);
     if(currentTab==='parcela'){
       const np=parseInt(document.getElementById('add-parcelas').value)||12;
-      parcelas.push({id:nextId++,nome,ico:CAT_ICONS[tx.cat]||'📦',total:valor*np,pago:0,total_p:np,mensal:valor});
+      parcelas.push({id:nextId++,nome,ico:CAT_ICONS[tx.cat]||'📦',total:valor*np,pago:0,total_p:np,mensal:valor,cat:tx.cat,dataInicial:tx.data,obs:''});
       save('parc',parcelas);
     }
     save('tx',transactions); save('nextId',nextId);
     showToast('✓ Transação salva!');
   }
-  
-  document.getElementById('add-title').textContent = 'Nova Transação';
+  document.getElementById('add-title').textContent='Nova Transação';
   document.getElementById('add-nome').value=''; document.getElementById('add-valor').value='';
   document.getElementById('add-obs').value='';
-  document.getElementById('delete-section').style.display = 'none';
-  editingTxId = null;
+  document.getElementById('delete-section').style.display='none';
+  editingTxId=null;
   refreshAllUI();
   setTimeout(()=>nav('home'),300);
 }
@@ -674,20 +859,118 @@ function buildMetas(){
   document.getElementById('metas-list').innerHTML=metas.length?metas.map(m=>{
     const pct=Math.min(100,Math.round(m.cur/m.val*100));
     const col=pct>=80?'var(--green)':pct>=50?'var(--blue)':'var(--amber)';
-    return`<div class="goal-card"><div class="goal-row"><div class="goal-name">${m.nome}</div><div class="goal-pct">${pct}%</div></div><div class="goal-sub">${fmt(m.cur)} de ${fmt(m.val)}</div>${m.desc?`<div class="goal-sub">${m.desc}</div>`:''}<div class="prog-bg"><div class="prog-fill" style="width:${pct}%;background:${col}"></div></div><div class="action-buttons goal-actions"><button class="btn sm" onclick="editMeta(${m.id})">Editar</button><button class="btn sm danger" onclick="deleteMeta(${m.id})">Excluir</button></div></div>`;
+    return`<div class="goal-card">
+      <div class="goal-row"><div class="goal-name">${m.nome}</div><div class="goal-pct">${pct}%</div></div>
+      <div class="goal-sub">${fmt(m.cur)} de ${fmt(m.val)}</div>
+      ${m.desc?`<div class="goal-sub">${m.desc}</div>`:''}
+      <div class="prog-bg"><div class="prog-fill" style="width:${pct}%;background:${col}"></div></div>
+      <div class="goal-actions">
+        <button class="btn sm" onclick="editMeta(${m.id})">${SVG_EDIT} Editar</button>
+        <button class="btn sm danger" onclick="deleteMeta(${m.id})">${SVG_DEL} Excluir</button>
+      </div>
+    </div>`;
   }).join(''):'<div style="padding:20px;text-align:center;color:var(--text2);font-size:14px">Nenhuma meta criada.<br>Toque em "+ Meta" para começar.</div>';
+
+  // PARCELAS com edição/exclusão
   document.getElementById('parcelas-list').innerHTML=parcelas.length?parcelas.map(p=>{
-    const faltam=p.total_p-p.pago, rest=faltam*p.mensal, pct=Math.round(p.pago/p.total_p*100);
-    return`<div class="parcel-card"><div class="parcel-ico">${p.ico}</div><div class="parcel-info"><div class="parcel-name">${p.nome}</div><div class="parcel-sub">${p.pago}/${p.total_p} parcelas · ${fmtS(p.mensal)}/mês</div></div><div class="parcel-val">${fmtS(rest)}</div></div>`;
-  }).join(''):'<div style="padding:20px 16px;text-align:center;color:var(--text2);font-size:14px">Nenhuma parcela ativa</div>';
-  document.getElementById('orc-list').innerHTML=orcamentos.map(o=>{
+    const faltam=p.total_p-p.pago;
+    const rest=faltam*p.mensal;
+    const pct=Math.round(p.pago/p.total_p*100);
+    return`<div class="parcel-card">
+      <div class="parcel-top">
+        <div class="parcel-ico">${p.ico||CAT_ICONS[p.cat]||'📦'}</div>
+        <div class="parcel-info">
+          <div class="parcel-name">${p.nome}</div>
+          <div class="parcel-sub">${p.pago}/${p.total_p} parcelas · ${fmtS(p.mensal)}/mês</div>
+          ${p.cat?`<div class="parcel-sub" style="margin-top:2px">${p.cat}</div>`:''}
+          <div class="prog-bg"><div class="prog-fill" style="width:${pct}%;background:var(--green)"></div></div>
+        </div>
+        <div class="parcel-val">${fmtS(rest)}<br><span style="font-size:10px;color:var(--text2);font-weight:400">restante</span></div>
+      </div>
+      <div class="parcel-actions">
+        <button class="btn sm" onclick="editParcela(${p.id})">${SVG_EDIT} Editar</button>
+        <button class="btn sm danger" onclick="openDeleteParcelaConfirmById(${p.id})">${SVG_DEL} Excluir</button>
+      </div>
+    </div>`;
+  }).join(''):'<div style="padding:20px 16px;text-align:center;color:var(--text2);font-size:14px">Nenhuma parcela ativa.<br>Toque em "+ Parcela" para adicionar.</div>';
+
+  document.getElementById('orc-list').innerHTML=orcamentos.length?orcamentos.map(o=>{
     const atual=catMap[o.cat]||0, pct=Math.min(100,Math.round(atual/o.limite*100));
     const col=pct>=100?'var(--red)':pct>=80?'var(--amber)':o.color;
     const badge=pct>=100?'<span class="badge r">Excedido</span>':pct>=80?'<span class="badge a">Alerta</span>':'';
-    return`<div class="bud-item"><div class="bud-row"><div class="bud-name">${o.cat} ${badge}</div><div class="bud-val">${fmtS(atual)} / ${fmtS(o.limite)}</div></div><div class="prog-bg"><div class="prog-fill" style="width:${pct}%;background:${col}"></div></div></div>`;
-  }).join('');
+    return`<div class="bud-item">
+      <div class="bud-row">
+        <div class="bud-name">${o.cat} ${badge}</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div class="bud-val">${fmtS(atual)} / ${fmtS(o.limite)}</div>
+          <button class="btn sm" style="padding:4px 8px" onclick="editOrc('${o.cat}')">${SVG_EDIT}</button>
+          <button class="btn sm danger" style="padding:4px 8px" onclick="deleteOrc('${o.cat}')">${SVG_DEL}</button>
+        </div>
+      </div>
+      <div class="prog-bg"><div class="prog-fill" style="width:${pct}%;background:${col}"></div></div>
+    </div>`;
+  }).join(''):'<div style="padding:16px 0;text-align:center;color:var(--text2);font-size:14px">Nenhum orçamento cadastrado.<br>Toque em "+ Orç." para adicionar.</div>';
 }
 
+// ORÇAMENTO CRUD
+function openAddOrc(){
+  editingOrcCat=null;
+  document.getElementById('orc-title').textContent='Novo orçamento';
+  document.getElementById('orc-save-btn').textContent='Criar orçamento';
+  document.getElementById('orc-delete-btn').style.display='none';
+  document.getElementById('o-cat').value='Alimentação';
+  document.getElementById('o-cat').disabled=false;
+  document.getElementById('o-limite').value='';
+  document.getElementById('modal-orc').style.display='block';
+}
+function editOrc(cat){
+  const o=orcamentos.find(x=>x.cat===cat);
+  if(!o)return;
+  editingOrcCat=cat;
+  document.getElementById('orc-title').textContent='Editar orçamento';
+  document.getElementById('orc-save-btn').textContent='Salvar alterações';
+  document.getElementById('orc-delete-btn').style.display='block';
+  document.getElementById('o-cat').value=o.cat;
+  document.getElementById('o-cat').disabled=true; // category is the key, don't change
+  document.getElementById('o-limite').value=o.limite;
+  document.getElementById('modal-orc').style.display='block';
+}
+function saveOrc(){
+  const cat=document.getElementById('o-cat').value;
+  const limite=parseFloat(document.getElementById('o-limite').value);
+  if(!cat||isNaN(limite)||limite<=0){showToast('Preencha categoria e limite!');return;}
+  if(editingOrcCat){
+    const o=orcamentos.find(x=>x.cat===editingOrcCat);
+    if(o){o.limite=limite;}
+    showToast('✓ Orçamento atualizado!');
+  }else{
+    if(orcamentos.find(x=>x.cat===cat)){showToast('Já existe orçamento para esta categoria!');return;}
+    const colors=['#1D9E75','#378ADD','#534AB7','#E24B4A','#BA7517','#D4537E','#D85A30','#639922'];
+    const color=colors[orcamentos.length%colors.length];
+    orcamentos.push({cat,limite,color});
+    showToast('✓ Orçamento criado!');
+  }
+  save('orc',orcamentos);
+  editingOrcCat=null;
+  document.getElementById('o-cat').disabled=false;
+  closeModal('modal-orc');
+  refreshAllUI();
+}
+function deleteOrc(cat){
+  const targetCat=cat||editingOrcCat;
+  if(!targetCat)return;
+  if(!confirm(`Excluir orçamento de ${targetCat}?`))return;
+  orcamentos=orcamentos.filter(x=>x.cat!==targetCat);
+  save('orc',orcamentos);
+  editingOrcCat=null;
+  document.getElementById('o-cat').disabled=false;
+  closeModal('modal-orc');
+  showToast('✓ Orçamento excluído!');
+  refreshAllUI();
+}
+}
+
+// META CRUD
 function openAddMeta(){
   editingMetaId=null;
   document.getElementById('meta-title').textContent='Nova meta';
@@ -731,7 +1014,6 @@ function saveMeta(){
   save('metas',metas);
   editingMetaId=null;
   closeModal('modal-meta');
-  document.getElementById('m-nome').value=''; document.getElementById('m-val').value=''; document.getElementById('m-cur').value=''; document.getElementById('m-desc').value='';
   refreshAllUI();
 }
 function deleteMeta(id){
@@ -744,6 +1026,279 @@ function deleteMeta(id){
   closeModal('modal-meta');
   showToast('✓ Meta excluída!');
   refreshAllUI();
+}
+
+// PARCELA CRUD
+function calcParcVal(){
+  const total=parseFloat(document.getElementById('p-total').value)||0;
+  const qtd=parseInt(document.getElementById('p-qtd').value)||0;
+  const prev=document.getElementById('p-mensal-preview');
+  const valEl=document.getElementById('p-mensal-val');
+  if(total>0&&qtd>0){
+    const mensal=total/qtd;
+    valEl.textContent=fmt(mensal);
+    prev.style.display='block';
+  }else{
+    prev.style.display='none';
+  }
+}
+
+function openAddParcela(){
+  editingParcelaId=null;
+  document.getElementById('parc-title').textContent='Nova parcela';
+  document.getElementById('parc-save-btn').textContent='Criar parcela';
+  document.getElementById('parc-delete-btn').style.display='none';
+  document.getElementById('p-pago-group').style.display='none';
+  document.getElementById('p-nome').value='';
+  document.getElementById('p-total').value='';
+  document.getElementById('p-qtd').value='';
+  document.getElementById('p-data').value=new Date().toISOString().split('T')[0];
+  document.getElementById('p-cat').value='Compras';
+  document.getElementById('p-pago').value='0';
+  document.getElementById('p-obs').value='';
+  document.getElementById('p-mensal-preview').style.display='none';
+  document.getElementById('modal-parcela').style.display='block';
+}
+
+function editParcela(id){
+  const p=parcelas.find(x=>x.id===id);
+  if(!p)return;
+  editingParcelaId=id;
+  document.getElementById('parc-title').textContent='Editar parcela';
+  document.getElementById('parc-save-btn').textContent='Salvar alterações';
+  document.getElementById('parc-delete-btn').style.display='block';
+  document.getElementById('p-pago-group').style.display='block';
+  document.getElementById('p-nome').value=p.nome;
+  document.getElementById('p-total').value=p.total;
+  document.getElementById('p-qtd').value=p.total_p;
+  document.getElementById('p-data').value=p.dataInicial||new Date().toISOString().split('T')[0];
+  document.getElementById('p-cat').value=p.cat||'Compras';
+  document.getElementById('p-pago').value=p.pago||0;
+  document.getElementById('p-obs').value=p.obs||'';
+  calcParcVal();
+  document.getElementById('modal-parcela').style.display='block';
+}
+
+function saveParcela(){
+  const nome=document.getElementById('p-nome').value.trim();
+  const total=parseFloat(document.getElementById('p-total').value);
+  const qtd=parseInt(document.getElementById('p-qtd').value);
+  if(!nome||isNaN(total)||total<=0||isNaN(qtd)||qtd<1){showToast('Preencha nome, valor e parcelas!');return;}
+  const mensal=total/qtd;
+  const cat=document.getElementById('p-cat').value;
+  const dataInicial=document.getElementById('p-data').value;
+  const obs=document.getElementById('p-obs').value.trim();
+
+  if(editingParcelaId){
+    const p=parcelas.find(x=>x.id===editingParcelaId);
+    if(!p){showToast('Parcela não encontrada');return;}
+    const novoPago=parseInt(document.getElementById('p-pago').value)||0;
+    const pagoAnterior=p.pago;
+    // Check if paid count changed
+    if(novoPago!==pagoAnterior&&novoPago>0&&pagoAnterior>0){
+      if(!confirm('Alterar o número de parcelas já pagas pode afetar cálculos anteriores. Deseja continuar?'))return;
+    }
+    p.nome=nome; p.total=total; p.total_p=qtd; p.mensal=mensal;
+    p.cat=cat; p.dataInicial=dataInicial; p.obs=obs;
+    p.pago=Math.min(novoPago,qtd);
+    p.ico=CAT_ICONS[cat]||'📦';
+    save('parc',parcelas);
+    showToast('✓ Parcela atualizada!');
+  }else{
+    const nova={id:nextId++,nome,ico:CAT_ICONS[cat]||'📦',total,pago:0,total_p:qtd,mensal,cat,dataInicial,obs};
+    parcelas.push(nova);
+    save('parc',parcelas); save('nextId',nextId);
+    showToast('✓ Parcela criada!');
+  }
+  editingParcelaId=null;
+  closeModal('modal-parcela');
+  refreshAllUI();
+}
+
+function openDeleteParcelaConfirm(){
+  document.getElementById('modal-parcela').style.display='none';
+  document.getElementById('modal-del-parcela').style.display='block';
+}
+function openDeleteParcelaConfirmById(id){
+  editingParcelaId=id;
+  document.getElementById('modal-del-parcela').style.display='block';
+}
+
+function deleteParcelaFuturas(){
+  if(!editingParcelaId)return;
+  const p=parcelas.find(x=>x.id===editingParcelaId);
+  if(!p)return;
+  // Mark as completed by setting total_p = pago (remove future)
+  if(p.pago===0){
+    parcelas=parcelas.filter(x=>x.id!==editingParcelaId);
+  }else{
+    p.total_p=p.pago; // only keep paid
+  }
+  save('parc',parcelas);
+  editingParcelaId=null;
+  closeModal('modal-del-parcela');
+  showToast('✓ Parcelas futuras removidas!');
+  refreshAllUI();
+}
+
+function deleteParcelaTudo(){
+  if(!editingParcelaId)return;
+  parcelas=parcelas.filter(x=>x.id!==editingParcelaId);
+  save('parc',parcelas);
+  editingParcelaId=null;
+  closeModal('modal-del-parcela');
+  showToast('✓ Parcelamento excluído!');
+  refreshAllUI();
+}
+
+// BILLS (CONTAS)
+function billStatus(b){
+  if(!b.vencimento) return {label:'Sem vencimento',cls:'bill-status-ok'};
+  const today=new Date(); today.setHours(0,0,0,0);
+  const d=new Date(b.vencimento+'T12:00:00'); d.setHours(0,0,0,0);
+  const diff=Math.round((d-today)/(1000*60*60*24));
+  if(diff<0) return {label:'Vencida',cls:'bill-status-vencida'};
+  if(diff===0) return {label:'Vence hoje',cls:'bill-status-hoje'};
+  if(diff<=5) return {label:`Vence em ${diff}d`,cls:'bill-status-proxima'};
+  return {label:`Vence em ${diff}d`,cls:'bill-status-ok'};
+}
+
+function billCard(b){
+  const ico=CAT_ICONS[b.cat]||'📄';
+  const st=billStatus(b);
+  const dateStr=b.vencimento?new Date(b.vencimento+'T12:00:00').toLocaleDateString('pt-BR'):'Sem vencimento';
+  return`<div class="bill-card">
+    <div class="bill-top">
+      <div class="bill-ico" style="background:${b.paga?'var(--green-l)':'var(--bg2)'}">${ico}</div>
+      <div class="bill-info">
+        <div class="bill-name" style="${b.paga?'text-decoration:line-through;color:var(--text2)':''}">${b.nome}</div>
+        <div class="bill-sub">${b.cat} · ${dateStr}</div>
+        <div class="bill-sub" style="margin-top:4px"><span class="${st.cls}">${st.label}</span>${b.paga?' <span class="badge g">Paga</span>':''}</div>
+        ${b.obs?`<div class="bill-sub" style="margin-top:2px">${b.obs}</div>`:''}
+      </div>
+      <div class="bill-val" style="${b.paga?'color:var(--text2)':''}">${fmt(b.valor)}</div>
+    </div>
+    <div class="bill-actions">
+      <button class="btn sm" onclick="toggleBillPaga(${b.id})">${b.paga?'↩ Desfazer':'✓ Marcar paga'}</button>
+      <button class="btn sm" onclick="editBill(${b.id})">${SVG_EDIT}</button>
+      <button class="btn sm danger" onclick="deleteBill(${b.id})">${SVG_DEL}</button>
+    </div>
+  </div>`;
+}
+
+function filterBills(f){
+  activeBillFilter=f;
+  ['all','pend','venc'].forEach(x=>{
+    const el=document.getElementById('bf-'+x);
+    el.style.cssText='border-radius:20px';
+  });
+  const ids={all:'bf-all',pendente:'bf-pend',vencida:'bf-venc'};
+  const el=document.getElementById(ids[f]);
+  el.style.background='var(--green)'; el.style.color='#fff'; el.style.borderColor='var(--green)';
+  renderBills();
+}
+
+function renderBills(){
+  let list=[...bills];
+  if(activeBillFilter==='pendente') list=list.filter(b=>!b.paga);
+  if(activeBillFilter==='vencida'){
+    const today=new Date(); today.setHours(0,0,0,0);
+    list=list.filter(b=>!b.paga&&b.vencimento&&new Date(b.vencimento+'T12:00:00')<today);
+  }
+  // sort: vencidas first, then by date
+  list.sort((a,b)=>{
+    if(a.paga!==b.paga) return a.paga?1:-1;
+    if(!a.vencimento&&!b.vencimento) return 0;
+    if(!a.vencimento) return 1;
+    if(!b.vencimento) return -1;
+    return new Date(a.vencimento)-new Date(b.vencimento);
+  });
+  document.getElementById('bills-list').innerHTML=list.length?list.map(billCard).join(''):'<div style="padding:40px;text-align:center;color:var(--text2);font-size:14px">Nenhuma conta encontrada.</div>';
+}
+
+function toggleBillPaga(id){
+  const b=bills.find(x=>x.id===id);
+  if(!b)return;
+  b.paga=!b.paga;
+  save('bills',bills);
+  renderBills();
+  refreshHome();
+}
+
+function openAddBill(){
+  editingBillId=null;
+  document.getElementById('bill-title').textContent='Nova conta';
+  document.getElementById('bill-save-btn').textContent='Salvar conta';
+  document.getElementById('bill-delete-btn').style.display='none';
+  document.getElementById('b-nome').value='';
+  document.getElementById('b-val').value='';
+  document.getElementById('b-cat').value='Moradia';
+  document.getElementById('b-venc').value='';
+  document.getElementById('b-obs').value='';
+  document.getElementById('b-sem-venc').checked=false;
+  document.getElementById('b-venc').disabled=false;
+  document.getElementById('modal-bill').style.display='block';
+}
+
+function editBill(id){
+  const b=bills.find(x=>x.id===id);
+  if(!b)return;
+  editingBillId=id;
+  document.getElementById('bill-title').textContent='Editar conta';
+  document.getElementById('bill-save-btn').textContent='Salvar alterações';
+  document.getElementById('bill-delete-btn').style.display='block';
+  document.getElementById('b-nome').value=b.nome;
+  document.getElementById('b-val').value=b.valor;
+  document.getElementById('b-cat').value=b.cat||'Outros';
+  document.getElementById('b-venc').value=b.vencimento||'';
+  document.getElementById('b-obs').value=b.obs||'';
+  const semVenc=!b.vencimento;
+  document.getElementById('b-sem-venc').checked=semVenc;
+  document.getElementById('b-venc').disabled=semVenc;
+  document.getElementById('modal-bill').style.display='block';
+}
+
+function toggleBillDueDate(){
+  const sem=document.getElementById('b-sem-venc').checked;
+  document.getElementById('b-venc').disabled=sem;
+  if(sem) document.getElementById('b-venc').value='';
+}
+
+function saveBill(){
+  const nome=document.getElementById('b-nome').value.trim();
+  const valor=parseFloat(document.getElementById('b-val').value);
+  if(!nome||isNaN(valor)||valor<=0){showToast('Preencha nome e valor!');return;}
+  const semVenc=document.getElementById('b-sem-venc').checked;
+  const vencimento=semVenc?null:(document.getElementById('b-venc').value||null);
+  const cat=document.getElementById('b-cat').value;
+  const obs=document.getElementById('b-obs').value.trim();
+  if(editingBillId){
+    const b=bills.find(x=>x.id===editingBillId);
+    if(b){b.nome=nome;b.valor=valor;b.cat=cat;b.vencimento=vencimento;b.obs=obs;}
+    showToast('✓ Conta atualizada!');
+  }else{
+    bills.push({id:nextId++,nome,valor,cat,vencimento,obs,paga:false});
+    save('nextId',nextId);
+    showToast('✓ Conta criada!');
+  }
+  save('bills',bills);
+  editingBillId=null;
+  closeModal('modal-bill');
+  renderBills();
+  refreshHome();
+}
+
+function deleteBill(id){
+  const targetId=id||editingBillId;
+  if(!targetId)return;
+  if(!confirm('Tem certeza que deseja excluir esta conta?'))return;
+  bills=bills.filter(x=>x.id!==targetId);
+  save('bills',bills);
+  editingBillId=null;
+  closeModal('modal-bill');
+  showToast('✓ Conta excluída!');
+  renderBills();
+  refreshHome();
 }
 
 // CALENDÁRIO
@@ -779,7 +1334,6 @@ const LOCAL_INSIGHTS=[
   'Lembre de registrar todas as despesas para ter um panorama financeiro completo.',
   'Parcelas longas comprometem sua renda futura. Considere quitar antecipadamente quando possível.',
 ];
-
 function addMsg(text,type){
   const d=document.createElement('div');
   d.className='ai-msg '+type; d.textContent=text;
@@ -805,7 +1359,6 @@ function exitChat(){
   iaInited=false;
   nav('home');
 }
-
 async function sendIA(){
   const inp=document.getElementById('ia-inp');
   const q=inp.value.trim(); if(!q)return;
@@ -820,16 +1373,19 @@ async function sendIA(){
   const rec=txm.filter(t=>t.tipo==='receita').reduce((a,t)=>a+t.valor,0);
   const desp=txm.filter(t=>t.tipo==='despesa').reduce((a,t)=>a+t.valor,0);
   const catMap={};txm.filter(t=>t.tipo==='despesa').forEach(t=>catMap[t.cat]=(catMap[t.cat]||0)+t.valor);
+  const today=new Date(); today.setHours(0,0,0,0);
+  const billsVenc=bills.filter(b=>!b.paga&&b.vencimento&&new Date(b.vencimento+'T12:00:00')<=today);
   const ctx=`Você é um assistente financeiro pessoal chamado SmartFinance. Dados financeiros do usuário (mês atual):
 - Receitas: R$ ${rec.toFixed(2)}
 - Despesas: R$ ${desp.toFixed(2)}
 - Saldo: R$ ${(rec-desp).toFixed(2)}
 - Gastos por categoria: ${Object.entries(catMap).map(([k,v])=>`${k}: R$${v.toFixed(0)}`).join(', ')}
-- Parcelas ativas: ${parcelas.map(p=>`${p.nome} R$${p.mensal}/mês (${p.pago}/${p.total_p})`).join(', ')}
-- Metas: ${metas.map(m=>`${m.nome}: ${Math.round(m.cur/m.val*100)}%`).join(', ')}
+- Parcelas ativas: ${parcelas.map(p=>`${p.nome} R$${p.mensal}/mês (${p.pago}/${p.total_p})`).join(', ')||'Nenhuma'}
+- Contas vencidas: ${billsVenc.map(b=>`${b.nome} R$${b.valor}`).join(', ')||'Nenhuma'}
+- Metas: ${metas.map(m=>`${m.nome}: ${Math.round(m.cur/m.val*100)}%`).join(', ')||'Nenhuma'}
 Responda em português, de forma direta e personalizada. Máximo 3 parágrafos curtos. Use os dados reais do usuário.`;
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':'sk-ant-d7...'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:500,system:ctx,messages:[{role:'user',content:q}]})});
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:500,system:ctx,messages:[{role:'user',content:q}]})});
     const data=await res.json();
     loading.remove();
     const reply=data.content?.find(b=>b.type==='text')?.text||LOCAL_INSIGHTS[0];
@@ -843,7 +1399,7 @@ Responda em português, de forma direta e personalizada. Máximo 3 parágrafos c
 // EXPORT
 function exportCSV(){
   const rows=[['Data','Nome','Tipo','Categoria','Valor','Pagamento','Obs']].concat(transactions.map(t=>[t.data,t.nome,t.tipo,t.cat,t.valor.toFixed(2),t.pagto,t.obs]));
-  const csv=rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\n');
+  const csv=rows.map(r=>r.map(v=>'"'+String(v||'').replace(/"/g,'""')+'"').join(',')).join('\n');
   const a=document.createElement('a');
   a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv);
   a.download='smartfinance_'+new Date().toISOString().split('T')[0]+'.csv';
