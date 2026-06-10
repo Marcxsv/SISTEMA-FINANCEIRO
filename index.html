@@ -737,22 +737,14 @@ function buildMetas(){
   document.getElementById('parcelas-list').innerHTML=parcelas.length?parcelas.map(p=>{
     const faltam=p.total_p-p.pago, rest=faltam*p.mensal, pct=Math.round(p.pago/p.total_p*100);
     const col=pct>=80?'var(--green)':pct>=50?'var(--blue)':'var(--amber)';
-    return`<div class="parcel-card" style="flex-direction:column;gap:8px">
-      <div style="display:flex;gap:12px;align-items:flex-start">
-        <div class="parcel-ico">${p.ico}</div>
-        <div class="parcel-info"><div class="parcel-name">${p.nome}</div><div class="parcel-sub">${p.pago}/${p.total_p} parcelas · ${fmtS(p.mensal)}/mês</div><div class="parcel-sub">Restam ${faltam}x = ${fmtS(rest)}</div></div>
-        <div class="parcel-val">${fmtS(rest)}</div>
-      </div>
-      <div class="prog-bg"><div class="prog-fill" style="width:${pct}%;background:${col}"></div></div>
-      <div class="action-buttons" style="margin-top:4px"><button class="btn sm full" onclick="editParcela(${p.id})">✏️ Editar</button><button class="btn sm danger" onclick="deleteParcelaById(${p.id})">🗑️ Excluir</button></div>
-    </div>`;
+    return`<div class="goal-card" style="margin:0 16px 10px"><div class="goal-row"><div class="goal-name">${p.ico} ${p.nome}</div><div class="goal-pct">${pct}%</div></div><div class="goal-sub">${p.pago}/${p.total_p} parcelas · ${fmtS(p.mensal)}/mês · Restam ${fmtS(rest)}</div><div class="prog-bg"><div class="prog-fill" style="width:${pct}%;background:${col}"></div></div><div class="action-buttons goal-actions"><button class="btn sm" onclick="editParcela(${p.id})">Editar</button><button class="btn sm danger" onclick="deleteParcelaById(${p.id})">Excluir</button></div></div>`;
   }).join(''):'<div style="padding:20px 16px;text-align:center;color:var(--text2);font-size:14px">Nenhuma parcela ativa.<br>Toque em "+ Nova" para adicionar.</div>';
 
   document.getElementById('orc-list').innerHTML=orcamentos.length?orcamentos.map((o,idx)=>{
     const atual=catMap[o.cat]||0, pct=Math.min(100,Math.round(atual/o.limite*100));
     const col=pct>=100?'var(--red)':pct>=80?'var(--amber)':o.color;
     const badge=pct>=100?'<span class="badge r">Excedido</span>':pct>=80?'<span class="badge a">Alerta</span>':'';
-    return`<div class="bud-item"><div class="bud-row"><div class="bud-name">${o.cat} ${badge}</div><div style="display:flex;gap:6px;align-items:center"><div class="bud-val">${fmtS(atual)} / ${fmtS(o.limite)}</div><button class="btn sm" style="padding:3px 8px;font-size:12px" onclick="editOrcamento('${o.cat}')">✏️</button><button class="btn sm danger" style="padding:3px 8px;font-size:12px" onclick="deleteOrcamentoByIdx('${o.cat}')">🗑️</button></div></div><div class="prog-bg"><div class="prog-fill" style="width:${pct}%;background:${col}"></div></div></div>`;
+    return`<div class="bud-item"><div class="bud-row"><div class="bud-name">${o.cat} ${badge}</div><div class="bud-val">${fmtS(atual)} / ${fmtS(o.limite)}</div></div><div class="prog-bg"><div class="prog-fill" style="width:${pct}%;background:${col}"></div></div><div class="action-buttons goal-actions"><button class="btn sm" onclick="editOrcamento('${o.cat}')">Editar</button><button class="btn sm danger" onclick="deleteOrcamentoByIdx('${o.cat}')">Excluir</button></div></div>`;
   }).join(''):'<div style="padding:20px;text-align:center;color:var(--text2);font-size:14px">Nenhum orçamento criado.<br>Toque em "+ Novo" para começar.</div>';
 }
 
