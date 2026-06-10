@@ -148,6 +148,8 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 .modal h3{font-size:17px;font-weight:700;margin-bottom:16px;color:var(--text)}
 .action-buttons{display:flex;gap:8px;margin-top:16px}
 .action-buttons .btn{flex:1}
+.color-dot{width:28px;height:28px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:border-color .15s}
+.color-dot.selected{border-color:var(--text);}
 </style>
 </head>
 <body>
@@ -290,17 +292,19 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
 <div class="screen" id="s-metas">
   <div class="header">
     <div class="logo" style="font-size:16px">Metas &amp; Orçamento</div>
-    <button class="btn sm" onclick="openAddMeta()" style="background:var(--green);color:#fff;border-color:var(--green)">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-      Meta
-    </button>
+    <div style="display:flex;gap:6px">
+      <button class="btn sm" onclick="openAddMeta()" style="background:var(--green);color:#fff;border-color:var(--green)">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Meta
+      </button>
+    </div>
   </div>
   <div class="scroll">
     <div class="sec" style="margin-top:4px">Metas financeiras</div>
     <div style="padding:0 16px" id="metas-list"></div>
-    <div class="sec">Parcelas ativas</div>
+    <div class="sec">Parcelas ativas <a onclick="openAddParcela()">+ Nova</a></div>
     <div id="parcelas-list"></div>
-    <div class="sec">Orçamento mensal</div>
+    <div class="sec">Orçamento mensal <a onclick="openAddOrcamento()">+ Novo</a></div>
     <div style="padding:0 16px" id="orc-list"></div>
     <div style="height:20px"></div>
   </div>
@@ -364,6 +368,59 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
       <div class="action-buttons">
         <button class="btn danger" id="meta-delete-btn" style="display:none" onclick="deleteMeta()">Excluir</button>
         <button class="btn primary" id="meta-save-btn" onclick="saveMeta()">Criar meta</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PARCELA -->
+<div id="modal-parcela" style="display:none">
+  <div class="modal-bg" onclick="closeModal('modal-parcela')">
+    <div class="modal" onclick="event.stopPropagation()">
+      <h3 id="parcela-title">Nova parcela</h3>
+      <div class="form-group"><label class="form-label">Nome</label><input id="p-nome" placeholder="Ex: iPhone 16 Pro"></div>
+      <div class="form-group"><label class="form-label">Ícone (emoji)</label><input id="p-ico" placeholder="📱" maxlength="4" style="font-size:22px;text-align:center"></div>
+      <div class="grid2" style="gap:10px;margin-bottom:14px">
+        <div><label class="form-label">Valor da parcela (R$)</label><input id="p-mensal" type="number" placeholder="500" inputmode="decimal"></div>
+        <div><label class="form-label">Total de parcelas</label><input id="p-total" type="number" placeholder="12" min="1" max="120" inputmode="numeric"></div>
+      </div>
+      <div class="form-group"><label class="form-label">Parcelas já pagas</label><input id="p-pago" type="number" placeholder="0" min="0" inputmode="numeric"></div>
+      <div class="action-buttons">
+        <button class="btn danger" id="parcela-delete-btn" style="display:none" onclick="deleteParcela()">Excluir</button>
+        <button class="btn primary" id="parcela-save-btn" onclick="saveParcela()">Criar parcela</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL ORÇAMENTO -->
+<div id="modal-orc" style="display:none">
+  <div class="modal-bg" onclick="closeModal('modal-orc')">
+    <div class="modal" onclick="event.stopPropagation()">
+      <h3 id="orc-title">Novo orçamento</h3>
+      <div class="form-group"><label class="form-label">Categoria</label>
+        <select id="o-cat">
+          <option>Alimentação</option><option>Transporte</option><option>Moradia</option><option>Saúde</option>
+          <option>Educação</option><option>Lazer</option><option>Assinaturas</option><option>Compras</option>
+          <option>Pets</option><option>Academia</option><option>Viagens</option><option>Outros</option>
+        </select>
+      </div>
+      <div class="form-group"><label class="form-label">Limite mensal (R$)</label><input id="o-limite" type="number" placeholder="500" inputmode="decimal"></div>
+      <div class="form-group"><label class="form-label">Cor</label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;padding-top:4px" id="o-colors">
+          <div class="color-dot" style="background:#1D9E75" data-color="#1D9E75" onclick="selectColor(this)"></div>
+          <div class="color-dot" style="background:#378ADD" data-color="#378ADD" onclick="selectColor(this)"></div>
+          <div class="color-dot" style="background:#534AB7" data-color="#534AB7" onclick="selectColor(this)"></div>
+          <div class="color-dot" style="background:#E24B4A" data-color="#E24B4A" onclick="selectColor(this)"></div>
+          <div class="color-dot" style="background:#BA7517" data-color="#BA7517" onclick="selectColor(this)"></div>
+          <div class="color-dot" style="background:#D4537E" data-color="#D4537E" onclick="selectColor(this)"></div>
+          <div class="color-dot" style="background:#639922" data-color="#639922" onclick="selectColor(this)"></div>
+          <div class="color-dot" style="background:#888780" data-color="#888780" onclick="selectColor(this)"></div>
+        </div>
+      </div>
+      <div class="action-buttons">
+        <button class="btn danger" id="orc-delete-btn" style="display:none" onclick="deleteOrcamento()">Excluir</button>
+        <button class="btn primary" id="orc-save-btn" onclick="saveOrcamento()">Criar orçamento</button>
       </div>
     </div>
   </div>
@@ -676,16 +733,27 @@ function buildMetas(){
     const col=pct>=80?'var(--green)':pct>=50?'var(--blue)':'var(--amber)';
     return`<div class="goal-card"><div class="goal-row"><div class="goal-name">${m.nome}</div><div class="goal-pct">${pct}%</div></div><div class="goal-sub">${fmt(m.cur)} de ${fmt(m.val)}</div>${m.desc?`<div class="goal-sub">${m.desc}</div>`:''}<div class="prog-bg"><div class="prog-fill" style="width:${pct}%;background:${col}"></div></div><div class="action-buttons goal-actions"><button class="btn sm" onclick="editMeta(${m.id})">Editar</button><button class="btn sm danger" onclick="deleteMeta(${m.id})">Excluir</button></div></div>`;
   }).join(''):'<div style="padding:20px;text-align:center;color:var(--text2);font-size:14px">Nenhuma meta criada.<br>Toque em "+ Meta" para começar.</div>';
+
   document.getElementById('parcelas-list').innerHTML=parcelas.length?parcelas.map(p=>{
     const faltam=p.total_p-p.pago, rest=faltam*p.mensal, pct=Math.round(p.pago/p.total_p*100);
-    return`<div class="parcel-card"><div class="parcel-ico">${p.ico}</div><div class="parcel-info"><div class="parcel-name">${p.nome}</div><div class="parcel-sub">${p.pago}/${p.total_p} parcelas · ${fmtS(p.mensal)}/mês</div></div><div class="parcel-val">${fmtS(rest)}</div></div>`;
-  }).join(''):'<div style="padding:20px 16px;text-align:center;color:var(--text2);font-size:14px">Nenhuma parcela ativa</div>';
-  document.getElementById('orc-list').innerHTML=orcamentos.map(o=>{
+    const col=pct>=80?'var(--green)':pct>=50?'var(--blue)':'var(--amber)';
+    return`<div class="parcel-card" style="flex-direction:column;gap:8px">
+      <div style="display:flex;gap:12px;align-items:flex-start">
+        <div class="parcel-ico">${p.ico}</div>
+        <div class="parcel-info"><div class="parcel-name">${p.nome}</div><div class="parcel-sub">${p.pago}/${p.total_p} parcelas · ${fmtS(p.mensal)}/mês</div><div class="parcel-sub">Restam ${faltam}x = ${fmtS(rest)}</div></div>
+        <div class="parcel-val">${fmtS(rest)}</div>
+      </div>
+      <div class="prog-bg"><div class="prog-fill" style="width:${pct}%;background:${col}"></div></div>
+      <div class="action-buttons" style="margin-top:4px"><button class="btn sm full" onclick="editParcela(${p.id})">✏️ Editar</button><button class="btn sm danger" onclick="deleteParcelaById(${p.id})">🗑️ Excluir</button></div>
+    </div>`;
+  }).join(''):'<div style="padding:20px 16px;text-align:center;color:var(--text2);font-size:14px">Nenhuma parcela ativa.<br>Toque em "+ Nova" para adicionar.</div>';
+
+  document.getElementById('orc-list').innerHTML=orcamentos.length?orcamentos.map((o,idx)=>{
     const atual=catMap[o.cat]||0, pct=Math.min(100,Math.round(atual/o.limite*100));
     const col=pct>=100?'var(--red)':pct>=80?'var(--amber)':o.color;
     const badge=pct>=100?'<span class="badge r">Excedido</span>':pct>=80?'<span class="badge a">Alerta</span>':'';
-    return`<div class="bud-item"><div class="bud-row"><div class="bud-name">${o.cat} ${badge}</div><div class="bud-val">${fmtS(atual)} / ${fmtS(o.limite)}</div></div><div class="prog-bg"><div class="prog-fill" style="width:${pct}%;background:${col}"></div></div></div>`;
-  }).join('');
+    return`<div class="bud-item"><div class="bud-row"><div class="bud-name">${o.cat} ${badge}</div><div style="display:flex;gap:6px;align-items:center"><div class="bud-val">${fmtS(atual)} / ${fmtS(o.limite)}</div><button class="btn sm" style="padding:3px 8px;font-size:12px" onclick="editOrcamento('${o.cat}')">✏️</button><button class="btn sm danger" style="padding:3px 8px;font-size:12px" onclick="deleteOrcamentoByIdx('${o.cat}')">🗑️</button></div></div><div class="prog-bg"><div class="prog-fill" style="width:${pct}%;background:${col}"></div></div></div>`;
+  }).join(''):'<div style="padding:20px;text-align:center;color:var(--text2);font-size:14px">Nenhum orçamento criado.<br>Toque em "+ Novo" para começar.</div>';
 }
 
 function openAddMeta(){
@@ -743,6 +811,142 @@ function deleteMeta(id){
   editingMetaId=null;
   closeModal('modal-meta');
   showToast('✓ Meta excluída!');
+  refreshAllUI();
+}
+
+// PARCELAS CRUD
+let editingParcelaId=null, selectedColor='#1D9E75';
+function openAddParcela(){
+  editingParcelaId=null;
+  document.getElementById('parcela-title').textContent='Nova parcela';
+  document.getElementById('parcela-save-btn').textContent='Criar parcela';
+  document.getElementById('parcela-delete-btn').style.display='none';
+  document.getElementById('p-nome').value='';
+  document.getElementById('p-ico').value='📦';
+  document.getElementById('p-mensal').value='';
+  document.getElementById('p-total').value='';
+  document.getElementById('p-pago').value='0';
+  document.getElementById('modal-parcela').style.display='block';
+}
+function editParcela(id){
+  const p=parcelas.find(x=>x.id===id); if(!p)return;
+  editingParcelaId=id;
+  document.getElementById('parcela-title').textContent='Editar parcela';
+  document.getElementById('parcela-save-btn').textContent='Salvar alterações';
+  document.getElementById('parcela-delete-btn').style.display='block';
+  document.getElementById('p-nome').value=p.nome;
+  document.getElementById('p-ico').value=p.ico;
+  document.getElementById('p-mensal').value=p.mensal;
+  document.getElementById('p-total').value=p.total_p;
+  document.getElementById('p-pago').value=p.pago;
+  document.getElementById('modal-parcela').style.display='block';
+}
+function saveParcela(){
+  const nome=document.getElementById('p-nome').value.trim();
+  const ico=document.getElementById('p-ico').value.trim()||'📦';
+  const mensal=parseFloat(document.getElementById('p-mensal').value);
+  const total_p=parseInt(document.getElementById('p-total').value);
+  const pago=parseInt(document.getElementById('p-pago').value)||0;
+  if(!nome||isNaN(mensal)||mensal<=0||isNaN(total_p)||total_p<1){showToast('Preencha todos os campos!');return;}
+  if(pago>total_p){showToast('Parcelas pagas não pode ser maior que o total!');return;}
+  if(editingParcelaId){
+    const p=parcelas.find(x=>x.id===editingParcelaId);
+    if(p){p.nome=nome;p.ico=ico;p.mensal=mensal;p.total_p=total_p;p.pago=pago;p.total=mensal*total_p;}
+    showToast('✓ Parcela atualizada!');
+  }else{
+    parcelas.push({id:nextId++,nome,ico,total:mensal*total_p,pago,total_p,mensal});
+    save('nextId',nextId);
+    showToast('✓ Parcela criada!');
+  }
+  save('parc',parcelas);
+  editingParcelaId=null;
+  closeModal('modal-parcela');
+  refreshAllUI();
+}
+function deleteParcela(){
+  if(!editingParcelaId)return;
+  if(!confirm('Excluir esta parcela?'))return;
+  parcelas=parcelas.filter(p=>p.id!==editingParcelaId);
+  save('parc',parcelas);
+  editingParcelaId=null;
+  closeModal('modal-parcela');
+  showToast('✓ Parcela excluída!');
+  refreshAllUI();
+}
+function deleteParcelaById(id){
+  if(!confirm('Excluir esta parcela?'))return;
+  parcelas=parcelas.filter(p=>p.id!==id);
+  save('parc',parcelas);
+  showToast('✓ Parcela excluída!');
+  refreshAllUI();
+}
+
+// ORÇAMENTOS CRUD
+let editingOrcCat=null;
+function selectColor(el){
+  document.querySelectorAll('.color-dot').forEach(d=>d.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedColor=el.dataset.color;
+}
+function openAddOrcamento(){
+  editingOrcCat=null;
+  document.getElementById('orc-title').textContent='Novo orçamento';
+  document.getElementById('orc-save-btn').textContent='Criar orçamento';
+  document.getElementById('orc-delete-btn').style.display='none';
+  document.getElementById('o-cat').value='Alimentação';
+  document.getElementById('o-limite').value='';
+  selectedColor='#1D9E75';
+  document.querySelectorAll('.color-dot').forEach(d=>d.classList.remove('selected'));
+  document.querySelector('.color-dot[data-color="#1D9E75"]').classList.add('selected');
+  document.getElementById('modal-orc').style.display='block';
+}
+function editOrcamento(cat){
+  const o=orcamentos.find(x=>x.cat===cat); if(!o)return;
+  editingOrcCat=cat;
+  document.getElementById('orc-title').textContent='Editar orçamento';
+  document.getElementById('orc-save-btn').textContent='Salvar alterações';
+  document.getElementById('orc-delete-btn').style.display='block';
+  document.getElementById('o-cat').value=o.cat;
+  document.getElementById('o-limite').value=o.limite;
+  selectedColor=o.color;
+  document.querySelectorAll('.color-dot').forEach(d=>d.classList.remove('selected'));
+  const dot=document.querySelector(`.color-dot[data-color="${o.color}"]`);
+  if(dot)dot.classList.add('selected');
+  document.getElementById('modal-orc').style.display='block';
+}
+function saveOrcamento(){
+  const cat=document.getElementById('o-cat').value;
+  const limite=parseFloat(document.getElementById('o-limite').value);
+  if(!cat||isNaN(limite)||limite<=0){showToast('Preencha categoria e limite!');return;}
+  if(editingOrcCat){
+    const o=orcamentos.find(x=>x.cat===editingOrcCat);
+    if(o){o.cat=cat;o.limite=limite;o.color=selectedColor;}
+    showToast('✓ Orçamento atualizado!');
+  }else{
+    if(orcamentos.find(x=>x.cat===cat)){showToast('Já existe orçamento para esta categoria!');return;}
+    orcamentos.push({cat,limite,color:selectedColor});
+    showToast('✓ Orçamento criado!');
+  }
+  save('orc',orcamentos);
+  editingOrcCat=null;
+  closeModal('modal-orc');
+  refreshAllUI();
+}
+function deleteOrcamento(){
+  if(!editingOrcCat)return;
+  if(!confirm('Excluir este orçamento?'))return;
+  orcamentos=orcamentos.filter(o=>o.cat!==editingOrcCat);
+  save('orc',orcamentos);
+  editingOrcCat=null;
+  closeModal('modal-orc');
+  showToast('✓ Orçamento excluído!');
+  refreshAllUI();
+}
+function deleteOrcamentoByIdx(cat){
+  if(!confirm('Excluir este orçamento?'))return;
+  orcamentos=orcamentos.filter(o=>o.cat!==cat);
+  save('orc',orcamentos);
+  showToast('✓ Orçamento excluído!');
   refreshAllUI();
 }
 
